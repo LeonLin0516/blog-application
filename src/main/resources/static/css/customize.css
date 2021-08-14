@@ -1,0 +1,138 @@
+/*----- body -----*/
+body {
+    background: url("../images/background.png");
+}
+
+/*----- padding-----*/
+.m-padded-tb-mini {
+    padding-top: 0.2em !important;
+    padding-bottom: 0.2em !important;
+}
+
+.m-padded-tb-large {
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+}
+
+.m-padded-tb-massive {
+    padding-top: 5em !important;
+    padding-bottom: 5em !important;
+}
+
+.m-padded-lr-mini {
+    padding-left: 0.2em !important;
+    padding-right: 0.2em !important;
+}
+
+.m-padded-lr-massive {
+    padding-left: 4em !important;
+    padding-right: 4em !important;
+}
+
+.m-responsive-padded-lr-massive {
+    padding-left: 4em !important;
+    padding-right: 4em !important;
+}
+
+/*----- margin -----*/
+.m-margin-bot-mini {
+    margin-bottom: 0.2em !important;
+}
+
+.m-margin-bot-small {
+    margin-bottom: 0.5em !important;
+}
+
+.m-margin-lr-mini {
+    margin-left: 0.2em !important;
+    margin-right: 0.2em !important;
+}
+
+/*----- text -----*/
+.m-text-default {
+    font-weight: 300 !important;
+    letter-spacing: 1px !important;
+    line-height: 1.8 !important;
+    opacity: 0.8 !important;
+}
+.m-text-thin {
+    font-weight: 300 !important;
+}
+.m-text-spaced {
+    letter-spacing: 1px !important;
+}
+.m-text-lined {
+    line-height: 1.8 !important;
+}
+.m-opacity-mini {
+    opacity: 0.8 !important;
+}
+
+/*----- display -----*/
+.m-inline-block {
+    display: inline-block !important;
+}
+
+.m-mobile-show {
+    display: none !important;
+}
+
+.m-alignment-responsive {
+    float: right;
+}
+
+.m-fill-all {
+    width: 100% !important;
+}
+
+/*----- position -----*/
+.m-position-absolute {
+    position: fixed;
+    top: calc((100% - 47rem - 4rem) / 2);;
+    right: calc((100% - 86rem - 4rem) / 2);
+}
+
+.m-position-center {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.m-alignment-responsive {
+    display: flex !important;
+    justify-content: flex-end !important;
+}
+
+.m-position-rel-container {
+    transform: translateX(0);
+}
+
+/*----- container -----*/
+.m-container {
+    max-width: 72em !important;
+    margin: auto !important;
+}
+
+@media screen and (max-width: 768px) {
+    .m-mobile-show {
+        display: block !important;
+    }
+    .m-mobile-hide {
+        display: none !important;
+    }
+    .m-responsive-padded-lr-massive {
+        padding-left: 0em !important;
+        padding-right: 0em !important;
+    }
+    .m-mobile-wide {
+        width: 100% !important;
+    }
+    .m-mobile-tb-mini {
+        padding-top: 0.2em !important;
+        padding-bottom: 0.2em !important;
+    }
+    .m-alignment-responsive {
+        display: flex !important;
+        justify-content: right !important;
+    }
+}

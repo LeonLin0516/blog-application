@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Post</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <link rel="stylesheet" href="../../static/css/customize.css">
+  <link rel="stylesheet" href="../../static/lib/md_editor/css/editormd.min.css">
+</head>
+<body>
+<!--Navigation Bar-->
+<nav class="ui inverted attached segment m-padded-tb-mini">
+  <div class="ui container">
+    <div class="ui inverted secondary stackable menu">
+      <h2 class="ui header teal item">Admin</h2>
+      <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>Navigate</a>
+      <a href="#" class="active m-item item m-mobile-hide"><i class="edit icon"></i>New Post</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>Tags</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="folder open icon"></i>Drafts</a>
+      <div class="right menu m-item m-mobile-hide">
+        <div class="ui dropdown item">
+          <div class="text">
+            <img src="../../static/images/avatar1_icon.jpeg" alt="" class="ui avatar image">
+            Leon Lin
+          </div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a href="#" class="item">Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui black menu toggle button m-position-top-right m-mobile-show">
+      <i class="sidebar icon"></i>
+    </div>
+  </div>
+</nav>
+
+<!--Main Contents-->
+<div class="m-container m-padded-tb-massive">
+  <div class="ui container">
+    <form action="post" class="ui form">
+
+      <!--Blog Information-->
+      <h4 class="ui dividing header">New Post</h4>
+      <div class="two fields">
+        <div class="field">
+          <input type="text" name="title" placeholder="Enter Title">
+        </div>
+        <div class="field">
+          <select multiple="" class="ui dropdown">
+            <option value="">Select Tags</option>
+            <option value="data structure">Data Structure</option>
+            <option value="algorithms">Algorithms</option>
+            <option value="computer vision">Computer Vision</option>
+            <option value="backend">Backend</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <input type="url" name="cover-url" placeholder="Cover Image URL">
+      </div>
+
+      <!--Blog Content Editor-->
+      <h4 class="ui dividing header">Content</h4>
+      <div class="field">
+        <div id="md-editor" style="z-index: 1 !important;">
+          <textarea name="content" id="content" style="display: none;" placeholder="Enter Blog Content"></textarea>
+        </div>
+      </div>
+
+      <!--Blog Post / Save Draft-->
+      <div class="ui right aligned container">
+        <button class="ui secondary button">Save Draft</button>
+        <button class="ui teal button">Post</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--Bottom Footer-->
+<footer class="ui inverted vertical segment m-padded-tb-massive">
+  <div class="ui center aligned container">
+    <div class="ui inverted divided stackable grid">
+      <div class="four wide column">
+        <div class="ui inverted link list">
+          <div class="item">
+            <img src="../static/images/wechat_qr_code.JPG" class="ui rounded image" alt="" style="wide:80px; height: 180px">
+          </div>
+        </div>
+      </div>
+      <div class="four wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced">Newest Posts</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item">User Story</a>
+          <a href="#" class="item">User Story</a>
+          <a href="#" class="item">User Story</a>
+        </div>
+      </div>
+      <div class="four wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced">Connect</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item">Email</a>
+          <a href="#" class="item">GitHub</a>
+          <a href="#" class="item">LinkedIn</a>
+        </div>
+      </div>
+      <div class="four wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced">About</h4>
+        <p class="m-opacity-mini">Hello! I'm Leon. This is my personal website for sharing blog posts, innovative ideas, researches, personal projects, etc. </p>
+      </div>
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright © 2020–2021 Designed by Leon Lin</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="../../static/lib/md_editor/editormd.min.js"></script>
+
+<!--Initialize Markdown Editor-->
+<script>
+  var testEditor;
+  $(function() {
+    testEditor = editormd("md-editor", {
+      width   : "100%",
+      height  : 640,
+      syncScrolling : "single",
+      path    : "../../static/lib/md_editor/lib/"
+    });
+  });
+</script>
+
+<script>
+  $('.menu.toggle').click(function () {
+    $('.m-item').toggleClass('m-mobile-hide');
+  });
+  $('.ui.dropdown')
+          .dropdown();
+  ;
+</script>
+</body>
+</html>

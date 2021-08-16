@@ -17,4 +17,9 @@ public class IndexController {
     public String blogPost() {
         return "blog-post";
     }
+
+    @GetMapping("/about-me")
+    public String aboutMe() {
+        return "about-me";
+    }
 }

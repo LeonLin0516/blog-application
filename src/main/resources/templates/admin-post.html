@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments_back :: head(~{::title})">
+  <title>New Post</title>
+  <link rel="stylesheet" href="../static/lib/md_editor/css/editormd.min.css" th:href="@{/lib/md_editor/css/editormd.min.css}">
+</head>
+
+<body>
+<!--Navigation Bar-->
+<nav th:replace="_fragments_back :: nav(2)"></nav>
+
+<!--Main Contents-->
+<div class="m-container m-padded-tb-massive">
+  <div class="ui container">
+    <form action="post" class="ui form">
+
+      <!--Blog Information-->
+      <h4 class="ui dividing header">New Post</h4>
+      <div class="two fields">
+        <div class="field">
+          <input type="text" name="title" placeholder="Enter Title">
+        </div>
+        <div class="field">
+          <select multiple="" class="ui dropdown">
+            <option value="">Select Tags</option>
+            <option value="data structure">Data Structure</option>
+            <option value="algorithms">Algorithms</option>
+            <option value="computer vision">Computer Vision</option>
+            <option value="backend">Backend</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <input type="url" name="cover-url" placeholder="Cover Image URL">
+      </div>
+
+      <!--Blog Content Editor-->
+      <h4 class="ui dividing header">Content</h4>
+      <div class="field">
+        <div id="md-editor" style="z-index: 1 !important;">
+          <textarea name="content" id="content" style="display: none;" placeholder="Enter Blog Content"></textarea>
+        </div>
+      </div>
+
+      <!--Blog Post / Save Draft-->
+      <div class="ui right aligned container">
+        <button class="ui secondary button">Save Draft</button>
+        <button class="ui teal button">Post</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--Bottom Footer-->
+<footer th:replace="_fragments_front :: footer"></footer>
+
+
+<th:block th:replace="_fragments_front :: sharedScripts"></th:block>
+<script src="../static/lib/md_editor/editormd.min.js" th:src="@{/lib/md_editor/editormd.min.js}"></script>
+
+<!--Initialize Markdown Editor-->
+<script>
+  var testEditor;
+  $(function() {
+    testEditor = editormd("md-editor", {
+      width   : "100%",
+      height  : 640,
+      syncScrolling : "single",
+      path    : "../static/lib/md_editor/lib"
+    });
+  });
+</script>
+
+<script>
+  $('.ui.dropdown')
+          .dropdown();
+  ;
+</script>
+</body>
+</html>

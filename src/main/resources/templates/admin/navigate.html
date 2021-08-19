@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="_fragments_back :: head(~{::title})">
+<head th:replace="admin/_fragments :: head(~{::title})">
     <title>Navigate</title>
 </head>
 <body>
     <!--Navigation Bar-->
-    <nav th:replace="_fragments_back :: nav(1)"></nav>
+    <nav th:replace="admin/_fragments :: nav(1)"></nav>
 
     <!--Main Contents-->
     <div class="m-container m-padded-tb-massive">
@@ -132,9 +132,9 @@
     </div>
 
     <!--Bottom Footer-->
-    <footer th:replace="_fragments_front :: footer"></footer>
+    <footer th:replace="admin/_fragments :: footer"></footer>
 
-<th:block th:replace="_fragments_front :: sharedScripts"></th:block>
+<th:block th:replace="admin/_fragments :: sharedScripts"></th:block>
 <script>
     $('.ui.dropdown')
         .dropdown();

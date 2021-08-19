@@ -1,9 +1,8 @@
 package com.leonplatform.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "t_user")
@@ -18,6 +17,9 @@ public class User {
     private String password;
     private String avatar;
     private Integer type;
+
+    @OneToMany(mappedBy = "user")
+    private List<Blog> blogs = new ArrayList<>();
 
     public User() {
     }
@@ -76,6 +78,14 @@ public class User {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
     }
 
     @Override

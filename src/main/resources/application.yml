@@ -3,10 +3,10 @@ spring:
     mode: HTML
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/?user=root
+    url: jdbc:mysql://localhost:3306/leon-platform?user=root
     username: root
     password: 1339014436
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true

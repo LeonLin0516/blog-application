@@ -13,7 +13,7 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/blog")
+    @GetMapping("/blog-post")
     public String blogPost() {
         return "blog-post";
     }
@@ -25,11 +25,11 @@ public class IndexController {
 
     @GetMapping("admin/navigate")
     public String adminNavigate() {
-        return "admin-navigate";
+        return "admin/navigate";
     }
 
     @GetMapping("admin/new-post")
     public String adminPost() {
-        return "admin-post";
+        return "admin/new-post";
     }
 }

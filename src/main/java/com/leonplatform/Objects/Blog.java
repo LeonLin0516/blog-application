@@ -1,5 +1,7 @@
 package com.leonplatform.Objects;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +17,6 @@ public class Blog {
     private String title;
     private String content;
     private String cover;
-//    private String tags;
     private Integer viewed;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdTime;
@@ -23,8 +24,14 @@ public class Blog {
     private Date updatedTime;
     private boolean isPublished;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Tag> tags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "blog")
+    private List<Comment> comments = new ArrayList<>();
+
+    @ManyToOne
+    private User user;
 
     public Blog() {
     }
@@ -60,14 +67,6 @@ public class Blog {
     public void setCover(String cover) {
         this.cover = cover;
     }
-
-//    public String getTags() {
-//        return tags;
-//    }
-//
-//    public void setTags(String tags) {
-//        this.tags = tags;
-//    }
 
     public Integer getViewed() {
         return viewed;
@@ -109,6 +108,22 @@ public class Blog {
         this.tags = tags;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Blog{" +
@@ -116,11 +131,11 @@ public class Blog {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", cover='" + cover + '\'' +
-                ", tags='" + tags + '\'' +
                 ", viewed=" + viewed +
                 ", createdTime=" + createdTime +
                 ", updatedTime=" + updatedTime +
                 ", isPublished=" + isPublished +
+                ", tags=" + tags +
                 '}';
     }
 }

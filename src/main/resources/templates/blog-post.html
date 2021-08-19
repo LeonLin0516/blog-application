@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head th:replace="_fragments_front :: head(~{::title})">
+<head th:replace="_fragments :: head(~{::title})">
     <title>Main</title>
 </head>
 
 <body>
     <!--Navigation Bar-->
-    <nav th:replace="_fragments_front :: nav(0)"></nav>
+    <nav th:replace="_fragments :: nav(0)"></nav>
 
     <!--Sidebar Menu-->
     <div class="m-position-absolute m-padded-tb-massive m-position-rel-container" style="z-index: 2">
@@ -538,10 +538,10 @@ h5,h6{font-size:1em;}
     </div>
 
     <!--Bottom Footer-->
-    <footer th:replace="_fragments_front :: footer"></footer>
+    <footer th:replace="_fragments :: footer"></footer>
 
 
-<th:block th:replace="_fragments_front :: sharedScripts"></th:block>
+<th:block th:replace="_fragments :: sharedScripts"></th:block>
 <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
 <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
 

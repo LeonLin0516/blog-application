@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="_fragments_front :: head(~{::title})">
+<head th:replace="_fragments :: head(~{::title})">
   <title>About Me</title>
 </head>
 
 <body>
 <!--Navigation Bar-->
-<nav th:replace="_fragments_front :: nav(4)"></nav>
+<nav th:replace="_fragments :: nav(4)"></nav>
 
 <!--Main Contents-->
 <div class="m-container m-padded-tb-massive">
@@ -38,8 +38,8 @@
 </div>
 
 <!--Bottom Footer-->
-<footer th:replace="_fragments_front :: footer"></footer>
+<footer th:replace="_fragments :: footer"></footer>
 
-<th:block th:replace="_fragments_front :: sharedScripts"></th:block>
+<th:block th:replace="_fragments :: sharedScripts"></th:block>
 </body>
 </html>

@@ -13,7 +13,7 @@
     <br>
     <br>
     <div class="m-container m-padded-tb-massive" style="max-width: 30em !important;">
-        <div class="ur container">
+        <div class="ui container">
             <div class="ui middle aligned center aligned grid">
                 <div class="column">
                     <h2 class="ui teal image header">
@@ -38,8 +38,8 @@
                             <button class="ui fluid large teal submit button">Login</button>
                         </div>
 
-                        <div class="ui error message"></div>
-                        <div class="ui mini negative message" th:text="${message}" th:unless="${#strings.isEmpty(message)}">Incorrect username and password!</div>
+                        <div class="ui mini error message"></div>
+                        <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">Incorrect username and password!</div>
 
                     </form>
                 </div>
@@ -52,11 +52,18 @@
 <script>
     $('.ui.form').form({
         fields : {
-            title : {
-                identifier : "username",
-                rule : [{
+            username : {
+                identifier : 'username',
+                rules : [{
                     type : 'empty',
-                    prompt : 'Username can\'t be empty'
+                    prompt : 'Username can\'t be empty',
+                }]
+            },
+            password : {
+                identifier : 'password',
+                rules : [{
+                    type : 'empty',
+                    prompt : 'Password can\'t be empty',
                 }]
             }
         }

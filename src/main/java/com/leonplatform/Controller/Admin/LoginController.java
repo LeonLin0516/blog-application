@@ -34,12 +34,12 @@ public class LoginController {
             return "admin/navigate";
         }
         attributes.addFlashAttribute("message","Incorrect username and password!");
-        return "redirect:admin/login";
+        return "redirect:/admin";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
-        return "redirect:admin";
+        return "redirect:/admin";
     }
 }

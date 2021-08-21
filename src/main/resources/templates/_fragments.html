@@ -16,10 +16,10 @@
     <div class="ui container">
       <div class="ui inverted secondary stackable menu">
         <h2 class="ui header teal item">Blog</h2>
-        <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>Main</a>
+        <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>Main</a>
         <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>Project</a>
         <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="trophy icon"></i>Tutorial</a>
-        <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="info icon"></i>About Me</a>
+        <a href="#" th:href="@{/about-me}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="info icon"></i>About Me</a>
         <div class="right item">
           <div class="ui icon inverted transparent input">
             <input type="text" placeholder="Search...">

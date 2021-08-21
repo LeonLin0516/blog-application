@@ -22,14 +22,4 @@ public class IndexController {
     public String aboutMe() {
         return "about-me";
     }
-
-    @GetMapping("admin/navigate")
-    public String adminNavigate() {
-        return "admin/navigate";
-    }
-
-    @GetMapping("admin/new-post")
-    public String adminPost() {
-        return "admin/new-post";
-    }
 }

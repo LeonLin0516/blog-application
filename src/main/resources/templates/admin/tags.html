@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/_fragments :: head(~{::title})">
     <title>Tags</title>
 </head>
@@ -14,11 +14,11 @@
 
                 <!--Adding Tag Form-->
                 <div style="display: flex !important; justify-content: center">
-                    <form action="#" method="post" class="ui segment compact form">
+                    <form action="#" method="post" th:action="@{/admin/tags/post}" class="ui segment compact form">
                         <div class="fields">
                             <div class="ten wide field">
                                 <label>Tag</label>
-                                <input type="text" name="tag" placeholder="Enter Tag Title">
+                                <input type="text" name="name" placeholder="Enter Tag Title">
                             </div>
                             <div class="six wide field">
                                 <label><br></label>
@@ -42,9 +42,9 @@
                         </thead>
                         <!--All Tags-->
                         <tbody>
-                        <tr>
-                            <td></td>
-                            <td>Title</td>
+                        <tr th:each="tag, iterStat : ${page.content}">
+                            <td th:text="${iterStat.count}">Index</td>
+                            <td th:text="${tag.name}">Title</td>
                             <td>
                                 <a href="" class="ui mini orange button">Edit</a>
                                 <a href="" class="ui mini red button">Delete</a>

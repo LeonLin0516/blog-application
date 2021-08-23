@@ -17,9 +17,4 @@ public class MenuController {
     public String adminPost() {
         return "admin/new-post";
     }
-
-    @GetMapping("/tags")
-    public String tags() {
-        return "admin/tags";
-    }
 }

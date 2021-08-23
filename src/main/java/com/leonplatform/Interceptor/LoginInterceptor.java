@@ -17,7 +17,6 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.sendRedirect("/admin");
             return false;
         }
-        System.out.println("user exist");
         return true;
     }
 }

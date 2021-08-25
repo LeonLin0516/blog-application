@@ -30,6 +30,11 @@ public class TagServiceImpl implements TagService {
         return tagRepository.findById(id);
     }
 
+    @Override
+    public Tag getTagByName(String name) {
+        return tagRepository.findByName(name).orElse(null);
+    }
+
     @Transactional
     @Override
     public Page<Tag> listTag(Pageable pageable) {

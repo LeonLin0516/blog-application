@@ -4,6 +4,10 @@ body {
 }
 
 /*----- padding-----*/
+.m-padded-b-large {
+    padding-bottom: 5em !important;
+}
+
 .m-padded-tb-mini {
     padding-top: 0.2em !important;
     padding-bottom: 0.2em !important;

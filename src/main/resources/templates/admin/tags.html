@@ -12,25 +12,42 @@
     <div class="m-container m-padded-tb-massive">
         <div class="ui container">
 
-                <!--Adding Tag Form-->
-                <div style="display: flex !important; justify-content: center">
-                    <form action="#" method="post" th:action="@{/admin/tags/post}" class="ui segment compact form">
-                        <div class="fields">
-                            <div class="ten wide field">
-                                <label>Tag</label>
-                                <input type="text" name="name" placeholder="Enter Tag Title">
-                            </div>
-                            <div class="six wide field">
-                                <label><br></label>
-                                <button class="ui teal button">Create</button>
-                            </div>
-                        </div>
-                    </form>
+            <div style="display: flex; justify-content: center" th:unless="${#strings.isEmpty(negativeMessage)}">
+                <div class="ui compact negative message">
+                    <i class="close icon"></i>
+                    <p th:text="${negativeMessage}">Message</p>
                 </div>
+            </div>
 
-                <div class="m-padded-tb-large" style="display: flex !important; justify-content: center !important;">
-                    <!--Display Search Results-->
-                    <table class="ui collapsing celled table">
+            <div style="display: flex; justify-content: center" th:unless="${#strings.isEmpty(positiveMessage)}">
+                <div class="ui compact positive message">
+                    <i class="close icon"></i>
+                    <p th:text="${positiveMessage}">Message</p>
+                </div>
+            </div>
+
+            <!--Adding Tag Form-->
+            <div style="display: flex !important; justify-content: center">
+
+                <form action="#" method="post" th:action="@{/admin/tags/post}" th:object="${tag}" class="ui segment compact form">
+                    <div class="fields">
+                        <div class="ten wide field">
+                            <label>Tag</label>
+                            <input type="text" name="name" placeholder="Enter Tag Title" th:value="*{name}">
+                        </div>
+                        <div class="six wide field">
+                            <label><br></label>
+                            <button class="ui teal button">Create</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!--Display Search Results-->
+            <div class="m-padded-tb-large" style="display: flex !important; justify-content: center !important;">
+                <table class="ui collapsing celled table">
 
                         <!--Header-->
                         <thead>
@@ -55,7 +72,7 @@
                         <tfoot>
                             <tr>
                                 <th colspan="5">
-                                    <div class="ui right floated pagination menu">
+                                    <div class="ui right floated pagination menu" th:if="${page.totalPages}>1">
                                         <a class="icon item" th:href="@{/admin/tags(page=${page.number}-1)}" th:unless="${page.first}">
                                             <i class="left chevron icon"></i>
                                         </a>
@@ -68,7 +85,8 @@
                         </tfoot>
 
                     </table>
-                </div>
+            </div>
+
         </div>
     </div>
 
@@ -77,6 +95,12 @@
 
 
 <th:block th:replace="admin/_fragments :: sharedScripts"></th:block>
-
+<script>
+    $('.message .close').on('click', function () {
+        $(this)
+            .closest('.message')
+            .transition('fade');
+    });
+</script>
 </body>
 </html>

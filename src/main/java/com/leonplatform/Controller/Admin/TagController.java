@@ -7,10 +7,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,15 +28,24 @@ public class TagController {
                        Model model) {
         System.out.println(tagService.listTag(pageable));
         model.addAttribute("page", tagService.listTag(pageable));
+        model.addAttribute("tag", new Tag());
         return "admin/tags";
     }
 
     @PostMapping("/tags/post")
-    public String post(Tag tag) {
+    public String post(Tag tag, RedirectAttributes redirectAttributes) {
+        if ("".equals(tag.getName())) {
+            redirectAttributes.addFlashAttribute("negativeMessage", "Tag title can't be empty!");
+            return "redirect:/admin/tags";
+        } else if (tagService.getTagByName(tag.getName()) != null) {
+            redirectAttributes.addFlashAttribute("negativeMessage", "Tag has already exist!");
+            return "redirect:/admin/tags";
+        }
         Tag t = tagService.saveTag(tag);
         if (t == null) {
-            System.out.println("Failed to add tag");
+            redirectAttributes.addFlashAttribute("negativeMessage", "Failed to create tag!");
         }
+        redirectAttributes.addFlashAttribute("positiveMessage", "Create tag successfully!");
         return "redirect:/admin/tags";
     }
 

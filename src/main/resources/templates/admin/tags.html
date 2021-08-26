@@ -12,6 +12,7 @@
     <div class="m-container m-padded-tb-massive">
         <div class="ui container">
 
+            <!--Display Success Message-->
             <div style="display: flex; justify-content: center" th:unless="${#strings.isEmpty(negativeMessage)}">
                 <div class="ui compact negative message">
                     <i class="close icon"></i>
@@ -19,6 +20,7 @@
                 </div>
             </div>
 
+            <!--Display Failure Message-->
             <div style="display: flex; justify-content: center" th:unless="${#strings.isEmpty(positiveMessage)}">
                 <div class="ui compact positive message">
                     <i class="close icon"></i>
@@ -49,42 +51,65 @@
             <div class="m-padded-tb-large" style="display: flex !important; justify-content: center !important;">
                 <table class="ui collapsing celled table">
 
-                        <!--Header-->
-                        <thead>
+                    <!--Header-->
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Tag Title</th>
+                        <th>Manage</th>
+                    </tr>
+                    </thead>
+                    <!--All Tags-->
+                    <tbody>
+                    <tr th:each="tag, iterStat : ${page.content}">
+                        <td th:text="${iterStat.count}">Index</td>
+                        <td th:text="${tag.name}">Title</td>
+                        <td>
+                            <button href="" class="ui mini orange button" id="edit">Edit</button>
+                            <a href="" th:href="@{/admin/tags/{id}/delete(id=${tag.id})}" class="ui mini red button">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <!--Menu Bar-->
+                    <tfoot>
                         <tr>
-                            <th></th>
-                            <th>Tag Title</th>
-                            <th>Manage</th>
+                            <th colspan="5">
+                                <div class="ui right floated pagination menu" th:if="${page.totalPages}>1">
+                                    <a class="icon item" th:href="@{/admin/tags(page=${page.number}-1)}" th:unless="${page.first}">
+                                        <i class="left chevron icon"></i>
+                                    </a>
+                                    <a class="icon item" th:href="@{/admin/tags(page=${page.number}+1)}" th:unless="${page.last}">
+                                        <i class="right chevron icon"></i>
+                                    </a>
+                                </div>
+                            </th>
                         </tr>
-                        </thead>
-                        <!--All Tags-->
-                        <tbody>
-                        <tr th:each="tag, iterStat : ${page.content}">
-                            <td th:text="${iterStat.count}">Index</td>
-                            <td th:text="${tag.name}">Title</td>
-                            <td>
-                                <a href="" class="ui mini orange button">Edit</a>
-                                <a href="" th:href="@{/admin/tags/{id}/delete(id=${tag.id})}" class="ui mini red button">Delete</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <!--Menu Bar-->
-                        <tfoot>
-                            <tr>
-                                <th colspan="5">
-                                    <div class="ui right floated pagination menu" th:if="${page.totalPages}>1">
-                                        <a class="icon item" th:href="@{/admin/tags(page=${page.number}-1)}" th:unless="${page.first}">
-                                            <i class="left chevron icon"></i>
-                                        </a>
-                                        <a class="icon item" th:href="@{/admin/tags(page=${page.number}+1)}" th:unless="${page.last}">
-                                            <i class="right chevron icon"></i>
-                                        </a>
-                                    </div>
-                                </th>
-                            </tr>
-                        </tfoot>
+                    </tfoot>
 
-                    </table>
+                </table>
+            </div>
+
+            <div class="ui mini modal">
+                <div class="header">Edit Tag</div>
+                <div class="content">
+                    <form action="#" method="post" th:action="@{/admin/tags/post}" th:object="${tag}" class="ui form">
+                        <div class="fields">
+                            <div class="field">
+                                <label>Tag</label>
+                                <input type="text" name="name" placeholder="Enter Tag Title" th:value="*{name}">
+                            </div>
+                            <div class="field">
+                                <label><br></label>
+                                <button class="ui teal button">Submit</button>
+                            </div>
+                            <div class="field">
+                                <label><br></label>
+                                <a class="ui black button" id="back">Back</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
             </div>
 
         </div>
@@ -100,6 +125,15 @@
         $(this)
             .closest('.message')
             .transition('fade');
+    });
+    $("#edit").click(function(){
+        $(".mini.modal").modal('show');
+    });
+    $("#back").click(function(){
+        $(".mini.modal").modal('hide');
+    });
+    $(".mini.modal").modal({
+        closable: true
     });
 </script>
 </body>

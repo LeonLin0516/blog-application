@@ -65,7 +65,11 @@
                         <td th:text="${iterStat.count}">Index</td>
                         <td th:text="${tag.name}">Title</td>
                         <td>
-                            <button href="" class="ui mini orange button" id="edit">Edit</button>
+                            <a class="ui mini orange button"
+                               id="" th:id="'edit_' + ${iterStat.count}"
+                               onclick="" th:onclick="@{'openModal(' + ${tag.id} + ');'}">
+                                Edit
+                            </a>
                             <a href="" th:href="@{/admin/tags/{id}/delete(id=${tag.id})}" class="ui mini red button">Delete</a>
                         </td>
                     </tr>
@@ -92,11 +96,13 @@
             <div class="ui mini modal">
                 <div class="header">Edit Tag</div>
                 <div class="content">
-                    <form action="#" method="post" th:action="@{/admin/tags/post}" th:object="${tag}" class="ui form">
+                    <form action="" method="post"
+                          th:object="${tag}"
+                          class="ui form" id="edit">
                         <div class="fields">
                             <div class="field">
                                 <label>Tag</label>
-                                <input type="text" name="name" placeholder="Enter Tag Title" th:value="*{name}">
+                                <input type="text" name="name" th:value="*{name}" placeholder="Enter Tag Title">
                             </div>
                             <div class="field">
                                 <label><br></label>
@@ -126,9 +132,11 @@
             .closest('.message')
             .transition('fade');
     });
-    $("#edit").click(function(){
+    function openModal(id) {
         $(".mini.modal").modal('show');
-    });
+        var modal = document.getElementById('edit');
+        modal.setAttribute("action", "/admin/tags/" + id + "/edit");
+    }
     $("#back").click(function(){
         $(".mini.modal").modal('hide');
     });

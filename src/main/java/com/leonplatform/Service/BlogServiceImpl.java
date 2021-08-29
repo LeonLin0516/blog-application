@@ -3,6 +3,7 @@ package com.leonplatform.Service;
 import com.leonplatform.DAO.BlogRepository;
 import com.leonplatform.NotFoundException;
 import com.leonplatform.Objects.Blog;
+import com.leonplatform.Objects.Tag;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -35,7 +38,21 @@ public class BlogServiceImpl implements BlogService {
     public Page<Blog> listBlog(Pageable pageable, Blog blog) {
         return blogRepository.findAll(new Specification<Blog>() {
             @Override
-            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+            public Predicate toPredicate(Root<Blog> root,
+                                         CriteriaQuery<?> criteriaQuery,
+                                         CriteriaBuilder criteriaBuilder) {
+
+                List<Predicate> predicates = new ArrayList<>();
+                if (blog.getTitle() != null && !"".equals(blog.getTitle())) {
+                    predicates.add(criteriaBuilder.like(root.<String>get("title"), "%" + blog.getTitle() + "%"));
+                }
+                if (blog.getTags() != null) {
+                    List<Tag> tags = blog.getTags();
+                    for (Tag t : tags) {
+                        predicates.add(criteriaBuilder.equal(root.<Tag>get("id"), t.getId()));
+                    }
+                }
+                criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
                 return null;
             }
         }, pageable);

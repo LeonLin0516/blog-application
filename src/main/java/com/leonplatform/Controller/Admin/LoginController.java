@@ -32,7 +32,7 @@ public class LoginController {
         if (user != null) {
             user.setPassword(null);
             session.setAttribute("user", user);
-            return "admin/navigate";
+            return "redirect:/admin/navigate";
         }
         attributes.addFlashAttribute("message","Incorrect username and password!");
         return "redirect:/admin";

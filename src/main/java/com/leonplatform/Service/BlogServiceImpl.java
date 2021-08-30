@@ -4,6 +4,7 @@ import com.leonplatform.DAO.BlogRepository;
 import com.leonplatform.NotFoundException;
 import com.leonplatform.Objects.Blog;
 import com.leonplatform.Objects.Tag;
+import com.leonplatform.ViewObjects.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,7 +36,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Page<Blog> listBlog(Pageable pageable, Blog blog) {
+    public Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery) {
+        System.out.println("find all......");
         return blogRepository.findAll(new Specification<Blog>() {
             @Override
             public Predicate toPredicate(Root<Blog> root,
@@ -43,15 +45,15 @@ public class BlogServiceImpl implements BlogService {
                                          CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
-                if (blog.getTitle() != null && !"".equals(blog.getTitle())) {
-                    predicates.add(criteriaBuilder.like(root.<String>get("title"), "%" + blog.getTitle() + "%"));
+                if (blogQuery.getTitle() != null && !"".equals(blogQuery.getTitle())) {
+                    predicates.add(criteriaBuilder.like(root.<String>get("title"), "%" + blogQuery.getTitle() + "%"));
                 }
-                if (blog.getTags() != null) {
-                    List<Tag> tags = blog.getTags();
-                    for (Tag t : tags) {
-                        predicates.add(criteriaBuilder.equal(root.<Tag>get("id"), t.getId()));
-                    }
-                }
+//                if (blogQuery.getTagIDs() != null) {
+//                    List<Long> IDs = blogQuery.getTagIDs();
+//                    for (Long id : IDs) {
+//                        predicates.add(criteriaBuilder.equal(root.<Tag>get("tag").get("id"), id));
+//                    }
+//                }
                 criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
                 return null;
             }

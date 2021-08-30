@@ -12,6 +12,7 @@
         <div class="ui container">
             <!--Search Form-->
             <form action="#" method="post" class="ui segment form">
+                <input type="hidden" name="page">
                 <div class="fields">
                     <div class="six wide field">
                         <label>Blog Title</label>
@@ -21,10 +22,10 @@
                         <label>Tags</label>
                         <select name="tags" id="tags" multiple="" class="ui dropdown">
                             <option value="">Select Tags</option>
-                            <option value="algorithms">Algorithms</option>
-                            <option value="machine learning">Machine Learning</option>
-                            <option value="data structure">Data Structure</option>
-                            <option value="database">Database</option>
+                            <option value="1">Algorithms</option>
+                            <option value="2">Machine Learning</option>
+                            <option value="3">Data Structure</option>
+                            <option value="4">Database</option>
                         </select>
                     </div>
                     <div class="two wide field">
@@ -51,14 +52,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>A General Approach to Dynamic Programming</td>
+                        <tr th:each="blog, iterStat : ${page.content}">
+                            <td th:text="${iterStat.count}">count</td>
+                            <td th:text="${blog.title}">title</td>
                             <td>
                                 <div class="ui teal label">Algorithms</div>
                                 <div class="ui teal label">Dynamic Programming</div>
                             </td>
-                            <td>07-21-2021</td>
+                            <td th:text="${blog.updatedTime}">07-21-2021</td>
                             <td>
                                 <a href="" class="ui mini orange button">Edit</a>
                                 <a href="" class="ui mini red button">Delete</a>

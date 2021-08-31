@@ -8,8 +8,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class MenuController {
 
-    @GetMapping("/new-post")
-    public String adminPost() {
-        return "admin/new-post";
-    }
+
 }

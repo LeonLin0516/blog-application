@@ -2,7 +2,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/_fragments :: head(~{::title})">
   <title>New Post</title>
-  <link rel="stylesheet" href="/lib/md_editor/css/editormd.css" th:href="@{/lib/md_editor/css/editormd.css}">
 </head>
 
 <body>
@@ -14,6 +13,8 @@
   <div class="ui container">
     <form action="post" class="ui form">
 
+      <div class="ui mini error message"></div>
+
       <!--Blog Information-->
       <h4 class="ui dividing header">New Post</h4>
       <div class="two fields">
@@ -21,17 +22,14 @@
           <input type="text" name="title" placeholder="Enter Title">
         </div>
         <div class="field">
-          <select multiple="" class="ui dropdown">
+          <select multiple="" name="tagIDs" class="ui dropdown">
             <option value="">Select Tags</option>
-            <option value="data structure">Data Structure</option>
-            <option value="algorithms">Algorithms</option>
-            <option value="computer vision">Computer Vision</option>
-            <option value="backend">Backend</option>
+            <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}">Select Tags</option>
           </select>
         </div>
       </div>
       <div class="field">
-        <input type="url" name="cover-url" placeholder="Cover Image URL">
+        <input type="url" name="cover" placeholder="Cover Image URL">
       </div>
 
       <!--Blog Content Editor-->
@@ -44,7 +42,7 @@
 
       <!--Blog Post / Save Draft-->
       <div class="ui right aligned container">
-        <button class="ui secondary button">Save Draft</button>
+        <a class="ui secondary button">Save Draft</a>
         <button class="ui teal button">Post</button>
       </div>
     </form>
@@ -56,7 +54,6 @@
 
 
 <th:block th:replace="admin/_fragments :: sharedScripts"></th:block>
-<script src="/lib/md_editor/editormd.min.js" th:src="@{/lib/md_editor/editormd.min.js}"></script>
 
 <!--Initialize Markdown Editor-->
 <script>
@@ -75,6 +72,31 @@
   $('.ui.dropdown')
           .dropdown();
   ;
+  $('.ui.form').form({
+    fields : {
+      title : {
+        identifier : 'title',
+        rules : [{
+          type : 'empty',
+          prompt : 'title can\'t be empty',
+        }]
+      },
+      tagIDs : {
+        identifier : 'tagIDs',
+        rules : [{
+          type : 'empty',
+          prompt : 'tags can\'t be empty',
+        }]
+      },
+      cover : {
+        identifier : 'cover',
+        rules : [{
+          type : 'empty',
+          prompt : 'cover image url can\'t be empty',
+        }]
+      }
+    }
+  });
 </script>
 </body>
 </html>

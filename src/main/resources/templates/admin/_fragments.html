@@ -6,8 +6,7 @@
     <title th:replace="${title}">Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../../static/css/customize.css" th:href="@{/css/customize.css}">
-    <link rel="stylesheet" href="../../static/css/typo.css" th:href="@{/css/typo.css}">
-    <link rel="stylesheet" href="../../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="../../static/lib/md_editor/css/editormd.css" th:href="@{/lib/md_editor/css/editormd.css}">
 </head>
 <body>
 
@@ -80,6 +79,7 @@
 <th:block th:fragment="sharedScripts">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="../../static/lib/md_editor/editormd.min.js" th:src="@{/lib/md_editor/editormd.min.js}"></script>
     <script>
         $('.menu.toggle').click(function () {
             $('.m-item').toggleClass('m-mobile-hide');

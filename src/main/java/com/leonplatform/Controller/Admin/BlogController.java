@@ -2,6 +2,7 @@ package com.leonplatform.Controller.Admin;
 
 import com.leonplatform.Objects.Blog;
 import com.leonplatform.Service.BlogService;
+import com.leonplatform.Service.TagService;
 import com.leonplatform.ViewObjects.BlogQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -17,12 +18,15 @@ public class BlogController {
 
     @Autowired
     BlogService blogService;
+    @Autowired
+    TagService tagService;
 
     @GetMapping("/navigate")
     public String blog(@PageableDefault(size = 5, sort = {"updatedTime"}) Pageable pageable,
                        BlogQuery blogQuery, Model model) {
 
         System.out.println("loading navigate page......");
+        model.addAttribute("tags", tagService.listTag());
         model.addAttribute("page", blogService.listBlog(pageable, blogQuery));
         return "admin/navigate";
     }

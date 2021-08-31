@@ -22,10 +22,7 @@
                         <label>Tags</label>
                         <select name="tags" id="tags" multiple="" class="ui dropdown">
                             <option value="">Select Tags</option>
-                            <option value="1">Algorithms</option>
-                            <option value="2">Machine Learning</option>
-                            <option value="3">Data Structure</option>
-                            <option value="4">Database</option>
+                            <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}">Select Tags</option>
                         </select>
                     </div>
                     <div class="two wide field">
@@ -71,11 +68,11 @@
                     <tfoot>
                     <tr>
                         <th colspan="5">
-                            <div class="ui right floated pagination menu">
-                                <a class="icon item">
+                            <div class="ui right floated pagination menu" th:if="${page.totalPages}>1">
+                                <a class="icon item" th:href="@{/admin/tags(page=${page.number}-1)}" th:unless="${page.first}">
                                     <i class="left chevron icon"></i>
                                 </a>
-                                <a class="icon item">
+                                <a class="icon item" th:href="@{/admin/tags(page=${page.number}+1)}" th:unless="${page.last}">
                                     <i class="right chevron icon"></i>
                                 </a>
                             </div>

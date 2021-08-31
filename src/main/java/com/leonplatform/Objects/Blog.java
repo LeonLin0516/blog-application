@@ -26,6 +26,8 @@ public class Blog {
 
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Tag> tags = new ArrayList<>();
+    @Transient
+    private String tagIDs;
 
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
@@ -106,6 +108,14 @@ public class Blog {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public String getTagIDs() {
+        return tagIDs;
+    }
+
+    public void setTagIDs(String tagIDs) {
+        this.tagIDs = tagIDs;
     }
 
     public List<Comment> getComments() {

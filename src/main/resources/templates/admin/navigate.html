@@ -10,6 +10,23 @@
     <!--Main Contents-->
     <div class="m-container m-padded-tb-massive">
         <div class="ui container">
+
+            <!--Display Success Message-->
+            <div style="display: flex; justify-content: center" th:unless="${#strings.isEmpty(negativeMessage)}">
+                <div class="ui compact negative message">
+                    <i class="close icon"></i>
+                    <p th:text="${negativeMessage}">Message</p>
+                </div>
+            </div>
+
+            <!--Display Failure Message-->
+            <div style="display: flex; justify-content: center" th:unless="${#strings.isEmpty(positiveMessage)}">
+                <div class="ui compact positive message">
+                    <i class="close icon"></i>
+                    <p th:text="${positiveMessage}">Message</p>
+                </div>
+            </div>
+
             <!--Search Form-->
             <form action="#" method="post" class="ui segment form">
                 <input type="hidden" name="page">

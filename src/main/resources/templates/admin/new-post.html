@@ -11,15 +11,35 @@
 <!--Main Contents-->
 <div class="m-container m-padded-tb-massive">
   <div class="ui container">
-    <form action="post" class="ui form">
+
+    <!--Display Success Message-->
+    <div style="display: flex; justify-content: center" th:unless="${#strings.isEmpty(negativeMessage)}">
+      <div class="ui compact negative message">
+        <i class="close icon"></i>
+        <p th:text="${negativeMessage}">Message</p>
+      </div>
+    </div>
+
+    <!--Display Failure Message-->
+    <div style="display: flex; justify-content: center" th:unless="${#strings.isEmpty(positiveMessage)}">
+      <div class="ui compact positive message">
+        <i class="close icon"></i>
+        <p th:text="${positiveMessage}">Message</p>
+      </div>
+    </div>
+
+    <form class="ui form"
+          method="post" th:action="@{/admin/new-post/post}"
+          th:object="${blog}">
 
       <div class="ui mini error message"></div>
 
       <!--Blog Information-->
       <h4 class="ui dividing header">New Post</h4>
+      <input type="hidden" name="isPublished">
       <div class="two fields">
         <div class="field">
-          <input type="text" name="title" placeholder="Enter Title">
+          <input type="text" name="title" placeholder="Enter Title" th:value="*{title}">
         </div>
         <div class="field">
           <select multiple="" name="tagIDs" class="ui dropdown">

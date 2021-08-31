@@ -84,6 +84,11 @@
         $('.menu.toggle').click(function () {
             $('.m-item').toggleClass('m-mobile-hide');
         });
+        $('.message .close').on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
     </script>
 </th:block>
 

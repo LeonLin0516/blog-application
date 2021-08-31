@@ -129,11 +129,6 @@
 
 <th:block th:replace="admin/_fragments :: sharedScripts"></th:block>
 <script>
-    $('.message .close').on('click', function () {
-        $(this)
-            .closest('.message')
-            .transition('fade');
-    });
     function openModal(id) {
         $(".mini.modal").modal('show');
         var modal = document.getElementById('edit');

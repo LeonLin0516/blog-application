@@ -7,7 +7,7 @@ import java.util.List;
 public class BlogQuery {
 
     private String title;
-    private List<Long> tagIDs;
+    private String tagIDs;
 
     public BlogQuery() {
     }
@@ -20,11 +20,11 @@ public class BlogQuery {
         this.title = title;
     }
 
-    public List<Long> getTagIDs() {
+    public String getTagIDs() {
         return tagIDs;
     }
 
-    public void setTagIDs(List<Long> tagIDs) {
+    public void setTagIDs(String tagIDs) {
         this.tagIDs = tagIDs;
     }
 }

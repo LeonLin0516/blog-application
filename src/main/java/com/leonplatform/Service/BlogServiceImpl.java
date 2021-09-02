@@ -12,12 +12,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.leonplatform.Utils.ConversionUtils.convertToList;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -37,7 +36,6 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery) {
-        System.out.println("find all......");
         return blogRepository.findAll(new Specification<Blog>() {
             @Override
             public Predicate toPredicate(Root<Blog> root,
@@ -49,9 +47,10 @@ public class BlogServiceImpl implements BlogService {
                     predicates.add(criteriaBuilder.like(root.<String>get("title"), "%" + blogQuery.getTitle() + "%"));
                 }
 //                if (blogQuery.getTagIDs() != null) {
-//                    List<Long> IDs = blogQuery.getTagIDs();
+//                    List<Long> IDs = convertToList(blogQuery.getTagIDs());
+//                    System.out.println(IDs);
 //                    for (Long id : IDs) {
-//                        predicates.add(criteriaBuilder.equal(root.<Tag>get("tag").get("id"), id));
+//                        predicates.add(criteriaBuilder.equal(root.<List<Tag>>get("tags").get("id"), id));
 //                    }
 //                }
                 criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));

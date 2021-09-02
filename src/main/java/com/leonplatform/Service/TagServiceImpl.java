@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.leonplatform.Utils.ConversionUtils.convertToList;
+
 @Service
 public class TagServiceImpl implements TagService {
 
@@ -53,17 +55,6 @@ public class TagServiceImpl implements TagService {
     @Override
     public List<Tag> listTag(String ids) {
         return tagRepository.findAllById(convertToList(ids));
-    }
-
-    private List<Long> convertToList(String ids) {
-        List<Long> list = new ArrayList<>();
-        if (ids != null && !"".equals(ids)) {
-            String[] split = ids.split(",");
-            for (String s : split) {
-                list.add(Long.parseLong(s));
-            }
-        }
-        return list;
     }
 
     @Transactional

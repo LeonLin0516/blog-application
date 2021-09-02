@@ -28,8 +28,9 @@
             </div>
 
             <!--Search Form-->
-            <form action="#" method="post" class="ui segment form">
-                <input type="hidden" name="page">
+            <form action="#" method="post" th:action="@{/admin/navigate/search}"
+                  th:object="${blogQuery}"
+                  class="ui segment form">
                 <div class="fields">
                     <div class="six wide field">
                         <label>Blog Title</label>
@@ -37,7 +38,7 @@
                     </div>
                     <div class="six wide field">
                         <label>Tags</label>
-                        <select name="tags" id="tags" multiple="" class="ui dropdown">
+                        <select multiple="" name="tagIDs" class="ui dropdown">
                             <option value="">Select Tags</option>
                             <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}">Select Tags</option>
                         </select>
@@ -48,7 +49,7 @@
                     </div>
                     <div class="two wide field">
                         <label><br></label>
-                        <button class="ui teal button"><i class="edit icon"></i>Create</button>
+                        <a class="ui teal button"><i class="edit icon"></i>Create</a>
                     </div>
                 </div>
             </form>
@@ -70,13 +71,14 @@
                             <td th:text="${iterStat.count}">count</td>
                             <td th:text="${blog.title}">title</td>
                             <td>
-                                <div class="ui teal label">Algorithms</div>
-                                <div class="ui teal label">Dynamic Programming</div>
+                                <th:block th:each="tag : ${blog.tags}">
+                                    <div class="ui teal label" th:text="${tag.name}"></div>
+                                </th:block>
                             </td>
                             <td th:text="${blog.updatedTime}">07-21-2021</td>
                             <td>
                                 <a href="" class="ui mini orange button">Edit</a>
-                                <a href="" class="ui mini red button">Delete</a>
+                                <a href="" th:href="@{/admin/navigate/{id}/delete(id=${blog.id})}" class="ui mini red button">Delete</a>
                             </td>
                         </tr>
                     </tbody>
@@ -86,10 +88,10 @@
                     <tr>
                         <th colspan="5">
                             <div class="ui right floated pagination menu" th:if="${page.totalPages}>1">
-                                <a class="icon item" th:href="@{/admin/tags(page=${page.number}-1)}" th:unless="${page.first}">
+                                <a class="icon item" th:href="@{/admin/navigate(page=${page.number}-1)}" th:unless="${page.first}">
                                     <i class="left chevron icon"></i>
                                 </a>
-                                <a class="icon item" th:href="@{/admin/tags(page=${page.number}+1)}" th:unless="${page.last}">
+                                <a class="icon item" th:href="@{/admin/navigate(page=${page.number}+1)}" th:unless="${page.last}">
                                     <i class="right chevron icon"></i>
                                 </a>
                             </div>

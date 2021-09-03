@@ -1,8 +1,10 @@
 package com.leonplatform.Controller.Admin;
 
+import com.leonplatform.NotFoundException;
 import com.leonplatform.Objects.Blog;
 import com.leonplatform.Service.BlogService;
 import com.leonplatform.Service.TagService;
+import com.leonplatform.Utils.ConversionUtils;
 import com.leonplatform.ViewObjects.BlogQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +26,7 @@ public class BlogController {
     TagService tagService;
 
     @GetMapping("/navigate")
-    public String blog(@PageableDefault(size = 2, sort = {"updatedTime"}) Pageable pageable,
+    public String blog(@PageableDefault(size = 5, sort = {"updatedTime"}) Pageable pageable,
                        BlogQuery blogQuery, Model model) {
 
         model.addAttribute("tags", tagService.listTag());
@@ -38,6 +40,18 @@ public class BlogController {
         model.addAttribute("tags", tagService.listTag());
         model.addAttribute("page", blogService.listBlog(pageable, blogQuery));
         return "admin/navigate";
+    }
+
+    @GetMapping("/navigate/{id}/new-post")
+    public String edit(@PathVariable Long id, Model model) {
+        System.out.println("blog id = " + id);
+        Blog blog = blogService.getBlog(id);
+        if (blog == null) {
+            throw new NotFoundException("Blog doesn't exist!");
+        }
+        model.addAttribute("blog", blog);
+        model.addAttribute("tags", tagService.listTag());
+        return "admin/new-post";
     }
 
     @GetMapping("/navigate/{id}/delete")

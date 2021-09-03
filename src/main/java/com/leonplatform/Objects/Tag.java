@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "t_tag")
-public class Tag {
+public class Tag implements Comparable<Tag> {
 
     @Id
     @GeneratedValue
@@ -51,5 +51,35 @@ public class Tag {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Tag o) {
+        if (o != null) {
+            if (this.equals(o)) {
+                return 0;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tag tag = (Tag) o;
+
+        if (id != null ? !id.equals(tag.id) : tag.id != null) return false;
+        if (name != null ? !name.equals(tag.name) : tag.name != null) return false;
+        return blogs != null ? blogs.equals(tag.blogs) : tag.blogs == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (blogs != null ? blogs.hashCode() : 0);
+        return result;
     }
 }

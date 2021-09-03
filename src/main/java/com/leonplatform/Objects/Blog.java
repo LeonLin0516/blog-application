@@ -1,5 +1,6 @@
 package com.leonplatform.Objects;
 
+import com.leonplatform.Utils.ConversionUtils;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -146,6 +147,9 @@ public class Blog {
                 ", updatedTime=" + updatedTime +
                 ", isPublished=" + isPublished +
                 ", tags=" + tags +
+                ", tagIDs='" + tagIDs + '\'' +
+                ", comments=" + comments +
+                ", user=" + user +
                 '}';
     }
 }

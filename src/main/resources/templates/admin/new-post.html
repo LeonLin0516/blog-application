@@ -41,21 +41,22 @@
           <input type="text" name="title" placeholder="Enter Title" th:value="*{title}">
         </div>
         <div class="field">
-          <select multiple="" name="tagIDs" class="ui dropdown">
+          <select class="ui search dropdown"
+                  multiple="" name="tagIDs">
             <option value="">Select Tags</option>
-            <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}">Select Tags</option>
+            <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}" th:selected="${#lists.contains(blog.getTags(), tag)}">Select Tags</option>
           </select>
         </div>
       </div>
       <div class="field">
-        <input type="url" name="cover" placeholder="Cover Image URL">
+        <input type="url" name="cover" th:value="*{cover}" placeholder="Cover Image URL">
       </div>
 
       <!--Blog Content Editor-->
       <h4 class="ui dividing header">Content</h4>
       <div class="field">
         <div id="md-editor" style="z-index: 1 !important;">
-          <textarea name="content" id="content" style="display: none;" placeholder="Enter Blog Content"></textarea>
+          <textarea name="content" th:text="*{content}" id="content" style="display: none;" placeholder="Enter Blog Content"></textarea>
         </div>
       </div>
 

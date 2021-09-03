@@ -77,7 +77,7 @@
                             </td>
                             <td th:text="${blog.updatedTime}">07-21-2021</td>
                             <td>
-                                <a href="" class="ui mini orange button">Edit</a>
+                                <a href="" th:href="@{/admin/navigate/{id}/new-post(id=${blog.id})}"class="ui mini orange button">Edit</a>
                                 <a href="" th:href="@{/admin/navigate/{id}/delete(id=${blog.id})}" class="ui mini red button">Delete</a>
                             </td>
                         </tr>

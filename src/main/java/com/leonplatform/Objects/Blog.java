@@ -16,14 +16,15 @@ public class Blog {
     @GeneratedValue
     private Long id;
     private String title;
-    private String content;
+    private String description;
     private String cover;
+    private String content;
     private Integer viewed;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdTime;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedTime;
-    private boolean isPublished;
+    private boolean published;
 
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Tag> tags = new ArrayList<>();
@@ -53,6 +54,14 @@ public class Blog {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getContent() {
@@ -96,11 +105,11 @@ public class Blog {
     }
 
     public boolean isPublished() {
-        return isPublished;
+        return published;
     }
 
     public void setPublished(boolean published) {
-        isPublished = published;
+        this.published = published;
     }
 
     public List<Tag> getTags() {
@@ -140,12 +149,13 @@ public class Blog {
         return "Blog{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
+                ", description='" + description + '\'' +
                 ", cover='" + cover + '\'' +
+                ", content='" + content + '\'' +
                 ", viewed=" + viewed +
                 ", createdTime=" + createdTime +
                 ", updatedTime=" + updatedTime +
-                ", isPublished=" + isPublished +
+                ", published=" + published +
                 ", tags=" + tags +
                 ", tagIDs='" + tagIDs + '\'' +
                 ", comments=" + comments +

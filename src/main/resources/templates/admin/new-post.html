@@ -34,6 +34,9 @@
 
       <div class="ui mini error message"></div>
 
+      <input type="hidden" name="id" th:value="*{id}">
+      <input type="hidden" name="published" th:value="*{published}">
+
       <!--Blog Information-->
       <h4 class="ui dividing header">New Post</h4>
       <div class="two fields">
@@ -51,6 +54,10 @@
       <div class="field">
         <input type="url" name="cover" th:value="*{cover}" placeholder="Cover Image URL">
       </div>
+      <h4 class="ui dividing header">Description</h4>
+      <div class="field">
+        <textarea name="description" th:text="*{description}" cols="30" rows="7"></textarea>
+      </div>
 
       <!--Blog Content Editor-->
       <h4 class="ui dividing header">Content</h4>
@@ -65,6 +72,7 @@
         <a class="ui secondary button">Save Draft</a>
         <button class="ui teal button">Post</button>
       </div>
+
     </form>
   </div>
 </div>

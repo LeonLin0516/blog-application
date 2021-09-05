@@ -42,9 +42,8 @@ public class BlogController {
         return "admin/navigate";
     }
 
-    @GetMapping("/navigate/{id}/new-post")
+    @GetMapping("/navigate/{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
-        System.out.println("blog id = " + id);
         Blog blog = blogService.getBlog(id);
         if (blog == null) {
             throw new NotFoundException("Blog doesn't exist!");

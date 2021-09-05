@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.leonplatform.Utils.ConversionUtils.convertToList;
@@ -57,16 +58,6 @@ public class BlogServiceImpl implements BlogService {
                 return null;
             }
         }, pageable);
-    }
-
-    @Override
-    public Blog updateBlog(Long id, Blog blog) {
-        Blog b = blogRepository.findById(id).get();
-        if (b == null) {
-            throw new NotFoundException("This Blog Post Does Not Exist!");
-        }
-        BeanUtils.copyProperties(blog, b);
-        return blogRepository.save(b);
     }
 
     @Override

@@ -62,6 +62,7 @@
                         <th></th>
                         <th>Title</th>
                         <th>Tags</th>
+                        <th>Status</th>
                         <th>Updated Date</th>
                         <th>Manage</th>
                     </tr>
@@ -75,9 +76,10 @@
                                     <div class="ui teal label" th:text="${tag.name}"></div>
                                 </th:block>
                             </td>
-                            <td th:text="${blog.updatedTime}">07-21-2021</td>
+                            <td th:text="${blog.published} ? 'Published' : 'Draft'"></td>
+                            <td th:text="${blog.updatedTime}"></td>
                             <td>
-                                <a href="" th:href="@{/admin/navigate/{id}/new-post(id=${blog.id})}"class="ui mini orange button">Edit</a>
+                                <a href="" th:href="@{/admin/navigate/{id}/edit(id=${blog.id})}"class="ui mini orange button">Edit</a>
                                 <a href="" th:href="@{/admin/navigate/{id}/delete(id=${blog.id})}" class="ui mini red button">Delete</a>
                             </td>
                         </tr>
@@ -86,7 +88,7 @@
                     <!--Menu Bar-->
                     <tfoot>
                     <tr>
-                        <th colspan="5">
+                        <th colspan="6">
                             <div class="ui right floated pagination menu" th:if="${page.totalPages}>1">
                                 <a class="icon item" th:href="@{/admin/navigate(page=${page.number}-1)}" th:unless="${page.first}">
                                     <i class="left chevron icon"></i>

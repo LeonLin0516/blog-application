@@ -34,12 +34,17 @@ public class NewPostController {
 
     @PostMapping("/new-post/post")
     public String post(Blog blog, RedirectAttributes redirectAttributes, HttpSession session) {
-        blog.setViewed(0);
-        blog.setCreatedTime(new Date());
-        blog.setUpdatedTime(new Date());
-        blog.setUser((User) session.getAttribute("user"));
-        blog.setPublished(true);
-        blog.setTags(tagService.listTag(blog.getTagIDs()));
+        if (blog.getId() == null) {
+            blog.setViewed(0);
+            blog.setCreatedTime(new Date());
+            blog.setUpdatedTime(new Date());
+            blog.setUser((User) session.getAttribute("user"));
+            blog.setPublished(true);
+            blog.setTags(tagService.listTag(blog.getTagIDs()));
+        } else {
+            blog.setUpdatedTime(new Date());
+            blog.setTags(tagService.listTag(blog.getTagIDs()));
+        }
         Blog b = blogService.saveBlog(blog);
         if (b == null) {
             redirectAttributes.addFlashAttribute("negativeMessage", "Failed!");
@@ -48,6 +53,5 @@ public class NewPostController {
         redirectAttributes.addFlashAttribute("positiveMessage", "Success!");
         return "redirect:/admin/navigate";
     }
-
 
 }

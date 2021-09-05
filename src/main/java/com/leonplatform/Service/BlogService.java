@@ -13,8 +13,6 @@ public interface BlogService {
 
     Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery);
 
-    Blog updateBlog(Long id, Blog blog);
-
     void deleteBlog(Long id);
 
 }

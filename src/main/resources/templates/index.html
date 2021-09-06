@@ -249,8 +249,10 @@
                 <!--Right Side-->
                 <div class="five wide column">
 
-                    <!--Right Side (tags)-->
+                    <!--Right Side-->
                     <div class="ui segments">
+
+                        <!--Display Tags (Header)-->
                         <div class="ui secondary segment">
                             <div class="ui two column grid">
                                 <div class="column">
@@ -261,31 +263,14 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!--Display Tags (Content)-->
                         <div class="ui teal segment">
                             <div class="ui vertical fluid menu">
-                                <a href="#" class="item">
-                                    test tag1
-                                    <div class="ui left pointing teal label">13</div>
-                                </a>
-                                <a href="#" class="item">
-                                    test tag1
-                                    <div class="ui left pointing teal label">13</div>
-                                </a>
-                                <a href="#" class="item">
-                                    test tag1
-                                    <div class="ui left pointing teal label">13</div>
-                                </a>
-                                <a href="#" class="item">
-                                    test tag1
-                                    <div class="ui left pointing teal label">13</div>
-                                </a>
-                                <a href="#" class="item">
-                                    test tag1
-                                    <div class="ui left pointing teal label">13</div>
-                                </a>
-                                <a href="#" class="item">
-                                    test tag1
-                                    <div class="ui left pointing teal label">13</div>
+                                <a th:each="tag : ${tags}"
+                                   href="#" class="item">
+                                    <span th:text="${tag.name}">Tag Name</span>
+                                    <div class="ui left pointing teal label" th:text="${#arrays.length(tag.blogs)}">13</div>
                                 </a>
                             </div>
                         </div>
@@ -353,6 +338,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -28,8 +28,9 @@
       </div>
     </div>
 
-    <form class="ui form"
-          method="post" th:action="@{/admin/new-post/post}"
+    <form class="ui form" id="blog-form"
+          method="post"
+          th:action="@{/admin/new-post/post}"
           th:object="${blog}">
 
       <div class="ui mini error message"></div>
@@ -69,8 +70,8 @@
 
       <!--Blog Post / Save Draft-->
       <div class="ui right aligned container">
-        <a class="ui secondary button">Save Draft</a>
-        <button class="ui teal button">Post</button>
+        <button class="ui secondary button" id="saveDraft">Save Draft</button>
+        <button class="ui teal button" id="post">Post</button>
       </div>
 
     </form>
@@ -124,6 +125,14 @@
         }]
       }
     }
+  });
+  $("#post").click(function () {
+    $('[name=published]').val(true);
+    $(".ui.form").submit();
+  });
+  $("#saveDraft").click(function () {
+    $('[name=published]').val(false);
+    $(".ui.form").submit();
   });
 </script>
 </body>

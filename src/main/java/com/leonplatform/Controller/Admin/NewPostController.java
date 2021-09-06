@@ -39,7 +39,6 @@ public class NewPostController {
             blog.setCreatedTime(new Date());
             blog.setUpdatedTime(new Date());
             blog.setUser((User) session.getAttribute("user"));
-            blog.setPublished(true);
             blog.setTags(tagService.listTag(blog.getTagIDs()));
         } else {
             blog.setUpdatedTime(new Date());
@@ -53,5 +52,4 @@ public class NewPostController {
         redirectAttributes.addFlashAttribute("positiveMessage", "Success!");
         return "redirect:/admin/navigate";
     }
-
 }

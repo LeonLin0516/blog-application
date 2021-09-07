@@ -54,9 +54,9 @@
                                             </div>
                                         </div>
                                         <div class="right aligned ten wide column">
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag1</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag2</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag3</a>
+                                            <a href="#" target="_blank" class="ui teal label m-text-thin">test tag1</a>
+                                            <a href="#" target="_blank" class="ui teal label m-text-thin">test tag2</a>
+                                            <a href="#" target="_blank" class="ui teal label m-text-thin">test tag3</a>
                                         </div>
                                     </div>
                                 </div>
@@ -249,7 +249,7 @@
                 <!--Right Side-->
                 <div class="five wide column">
 
-                    <!--Right Side-->
+                    <!--Tags-->
                     <div class="ui segments">
 
                         <!--Display Tags (Header)-->
@@ -276,7 +276,7 @@
                         </div>
                     </div>
 
-                    <!--Right Side (Archives)-->
+                    <!--Archives-->
                     <div class="ui segments">
                         <div class="ui secondary segment">
                             <div class="ui two column grid">
@@ -290,47 +290,15 @@
                         </div>
                         <div class="ui teal segment">
                             <div class="ui fluid vertical menu">
-                                <div class="item">
+                                <div th:each="archive : ${archives.months}"
+                                     class="item">
                                     <div class='ui center pointing fluid dropdown'>
-                                        <div class='text'>July 2021</div>
+                                        <div th:text="${archive}" class='text'>Month Year</div>
                                         <i class='dropdown icon'></i>
                                         <div class='menu'>
-                                            <div class='item'>User Settings</div>
-                                            <div class='item'>Team Settings</div>
-                                            <div class='item'>Redeem Game Code</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class='ui center pointing fluid dropdown'>
-                                        <div class='text'>June 2021</div>
-                                        <i class='dropdown icon'></i>
-                                        <div class='menu'>
-                                            <div class='item'>User Settings</div>
-                                            <div class='item'>Team Settings</div>
-                                            <div class='item'>Redeem Game Code</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class='ui center pointing fluid dropdown'>
-                                        <div class='text'>October 2020</div>
-                                        <i class='dropdown icon'></i>
-                                        <div class='menu'>
-                                            <div class='item'>User Settings</div>
-                                            <div class='item'>Team Settings</div>
-                                            <div class='item'>Redeem Game Code</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class='ui center pointing fluid dropdown'>
-                                        <div class='text'>September 2019</div>
-                                        <i class='dropdown icon'></i>
-                                        <div class='menu'>
-                                            <div class='item'>User Settings</div>
-                                            <div class='item'>Team Settings</div>
-                                            <div class='item'>Redeem Game Code</div>
+                                            <th:block th:each="blog : ${archives.monthArchives.get(archive)}">
+                                                <div class='item' th:text="${blog.title}">Title</div>
+                                            </th:block>
                                         </div>
                                     </div>
                                 </div>

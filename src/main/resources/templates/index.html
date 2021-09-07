@@ -21,7 +21,7 @@
                     <div class="ui top attached segment">
                         <div class="ui middle aligned two column grid">
                             <div class="column">
-                                Total <h2 class="ui orange header m-inline-block">14</h2> Posts
+                                Total <h2 th:text="${page.totalElements}" class="ui orange header m-inline-block">14</h2> Posts
                             </div>
 
                             <div class="right aligned column">
@@ -37,19 +37,21 @@
 
                     <!--display all blogs-->
                     <div class="ui attached segment">
-                        <div class="ui vertical segment m-padded-tb-large">
+                        <div th:each="blog : ${page.content}"
+                             class="ui vertical segment m-padded-tb-large">
                             <div class="ui middle aligned mobile reversed stackable grid">
                                 <div class="eleven wide column">
-                                    <h3 class="ui header">Test Post</h3>
-                                    <p class="m-text-default">This is a test post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                    <h3 th:text="${blog.title}" class="ui header">Title</h3>
+                                    <p class="m-text-default" th:text="${blog.description}">This is a test post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                    <br>
                                     <div class="ui grid">
                                         <div class="six wide column">
                                             <div class="ui mini horizontal link list">
                                                 <div class="item">
-                                                    <i class="calendar alternate outline icon"></i> 07-14-2021
+                                                    <i class="calendar alternate outline icon"></i><span th:text="${#dates.format(blog.updatedTime, 'MM-dd-yyyy')}">Updated Date</span>
                                                 </div>
                                                 <div class="item">
-                                                    <i class="eye icon"></i> 123
+                                                    <i class="eye icon"></i> <th:block th:text="${blog.viewed}"></th:block>
                                                 </div>
                                             </div>
                                         </div>
@@ -57,156 +59,6 @@
                                             <a href="#" target="_blank" class="ui teal label m-text-thin">test tag1</a>
                                             <a href="#" target="_blank" class="ui teal label m-text-thin">test tag2</a>
                                             <a href="#" target="_blank" class="ui teal label m-text-thin">test tag3</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="five wide column">
-                                    <a href="#" target="_blank">
-                                        <img src="https://picsum.photos/id/102/800/450" alt="" class="ui rounded image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ui vertical segment m-padded-tb-large">
-                            <div class="ui mobile reversed stackable grid">
-                                <div class="eleven wide column">
-                                    <h3 class="ui header">Test Post</h3>
-                                    <p class="m-text-default">This is a test post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                    <div class="ui grid">
-                                        <div class="six wide column">
-                                            <div class="ui mini horizontal link list">
-                                                <div class="item">
-                                                    <i class="calendar alternate outline icon"></i> 07-14-2021
-                                                </div>
-                                                <div class="item">
-                                                    <i class="eye icon"></i> 123
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="right aligned ten wide column">
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag1</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag2</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag3</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="five wide column">
-                                    <a href="#" target="_blank">
-                                        <img src="https://picsum.photos/id/102/800/450" alt="" class="ui rounded image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ui vertical segment m-padded-tb-large">
-                            <div class="ui mobile reversed stackable grid">
-                                <div class="eleven wide column">
-                                    <h3 class="ui header">Test Post</h3>
-                                    <p class="m-text-default">This is a test post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                    <div class="ui grid">
-                                        <div class="six wide column">
-                                            <div class="ui mini horizontal link list">
-                                                <div class="item">
-                                                    <i class="calendar alternate outline icon"></i> 07-14-2021
-                                                </div>
-                                                <div class="item">
-                                                    <i class="eye icon"></i> 123
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="right aligned ten wide column">
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag1</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag2</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag3</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="five wide column">
-                                    <a href="#" target="_blank">
-                                        <img src="https://picsum.photos/id/102/800/450" alt="" class="ui rounded image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ui vertical segment m-padded-tb-large">
-                            <div class="ui mobile reversed stackable grid">
-                                <div class="eleven wide column">
-                                    <h3 class="ui header">Test Post</h3>
-                                    <p class="m-text-default">This is a test post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                    <div class="ui grid">
-                                        <div class="six wide column">
-                                            <div class="ui mini horizontal link list">
-                                                <div class="item">
-                                                    <i class="calendar alternate outline icon"></i> 07-14-2021
-                                                </div>
-                                                <div class="item">
-                                                    <i class="eye icon"></i> 123
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="right aligned ten wide column">
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag1</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag2</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag3</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="five wide column">
-                                    <a href="#" target="_blank">
-                                        <img src="https://picsum.photos/id/102/800/450" alt="" class="ui rounded image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ui vertical segment m-padded-tb-large">
-                            <div class="ui mobile reversed stackable grid">
-                                <div class="eleven wide column">
-                                    <h3 class="ui header">Test Post</h3>
-                                    <p class="m-text-default">This is a test post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                    <div class="ui grid">
-                                        <div class="six wide column">
-                                            <div class="ui mini horizontal link list">
-                                                <div class="item">
-                                                    <i class="calendar alternate outline icon"></i> 07-14-2021
-                                                </div>
-                                                <div class="item">
-                                                    <i class="eye icon"></i> 123
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="right aligned ten wide column">
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag1</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag2</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag3</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="five wide column">
-                                    <a href="#" target="_blank">
-                                        <img src="https://picsum.photos/id/102/800/450" alt="" class="ui rounded image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ui vertical segment m-padded-tb-large">
-                            <div class="ui mobile reversed stackable grid">
-                                <div class="eleven wide column">
-                                    <h3 class="ui header">Test Post</h3>
-                                    <p class="m-text-default">This is a test post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                    <div class="ui grid">
-                                        <div class="six wide column">
-                                            <div class="ui mini horizontal link list">
-                                                <div class="item">
-                                                    <i class="calendar alternate outline icon"></i> 07-14-2021
-                                                </div>
-                                                <div class="item">
-                                                    <i class="eye icon"></i> 123
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="right aligned ten wide column">
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag1</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag2</a>
-                                            <a href="#" target="_blank" class="ui basic teal label m-text-thin">test tag3</a>
                                         </div>
                                     </div>
                                 </div>

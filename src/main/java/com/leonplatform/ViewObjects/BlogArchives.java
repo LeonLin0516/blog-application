@@ -23,9 +23,9 @@ public class BlogArchives {
         for (Blog blog : blogs) {
             Calendar cal = Calendar.getInstance();
             cal.setTime(blog.getUpdatedTime());
-            month = Month.of(cal.get(Calendar.MONTH)+1).name();
+            month = Month.of(cal.get(Calendar.MONTH)+1).name().toLowerCase();
             year = Year.of(cal.get(Calendar.YEAR)).toString();
-            monthYear = new StringBuilder(month + " " + year).toString();
+            monthYear = new StringBuilder(month.substring(0,1).toUpperCase()+month.substring(1)+ " " + year).toString();
             if (!monthArchives.containsKey(monthYear)) {
                 monthArchives.put(monthYear, new ArrayList<Blog>());
                 months.add(monthYear);

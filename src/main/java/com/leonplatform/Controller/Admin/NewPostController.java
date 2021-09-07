@@ -35,7 +35,7 @@ public class NewPostController {
     @PostMapping("/new-post/post")
     public String post(Blog blog, RedirectAttributes redirectAttributes, HttpSession session) {
         if (blog.getId() == null) {
-            blog.setViewed(0);
+            blog.setViewed(Integer.valueOf(0));
             blog.setCreatedTime(new Date());
             blog.setUpdatedTime(new Date());
             blog.setUser((User) session.getAttribute("user"));

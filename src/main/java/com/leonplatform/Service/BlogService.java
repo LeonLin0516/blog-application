@@ -13,6 +13,8 @@ public interface BlogService {
 
     Blog saveBlog(Blog blog);
 
+    Page<Blog> listBlog(Pageable pageable);
+
     Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery);
 
     List<Blog> listBlog();

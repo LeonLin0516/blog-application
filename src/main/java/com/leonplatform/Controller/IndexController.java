@@ -25,6 +25,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(@PageableDefault(size = 5, sort = {"updatedTime"}) Pageable pageable,
                         Model model) {
+        model.addAttribute("page", blogService.listBlog(pageable));
         model.addAttribute("tags", tagService.listTopTags(7));
         model.addAttribute("archives", new BlogArchives(blogService.listBlog()));
         return "index";

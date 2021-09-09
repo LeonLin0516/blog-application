@@ -53,6 +53,9 @@ body {
 }
 
 /*----- text -----*/
+.m-header-h3 {
+    font-size: medium !important;
+}
 .m-text-default {
     font-weight: 300 !important;
     letter-spacing: 1px !important;
@@ -70,6 +73,12 @@ body {
 }
 .m-opacity-mini {
     opacity: 0.8 !important;
+}
+
+.m-title-hovered:hover {
+    opacity: 0.5 !important;
+    text-decoration: none !important;
+    cursor: pointer;
 }
 
 /*----- display -----*/

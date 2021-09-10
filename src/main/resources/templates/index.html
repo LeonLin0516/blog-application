@@ -38,11 +38,12 @@
                     <!--display all blogs-->
                     <div class="ui attached segment">
                         <div th:each="blog : ${page.content}"
+                             th:if="${blog.published == true}"
                              class="ui vertical segment m-padded-tb-large">
                             <div class="ui middle aligned mobile reversed stackable grid">
                                 <div class="eleven wide column">
                                     <a th:href="@{/blog-post/{id}(id=${blog.id})}" th:text="${blog.title}" class="ui h3 header m-title-hovered">Title</a>
-                                    <p class="m-text-default" th:text="${blog.description}">This is a test post. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                    <p class="m-text-default" th:text="${blog.description}"></p>
                                     <br>
                                     <div class="ui grid">
                                         <div class="six wide column">

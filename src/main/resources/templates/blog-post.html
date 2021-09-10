@@ -29,36 +29,33 @@
             <div class="ui top attached two column segment">
                 <div class="ui stackable two column grid">
                     <div class="column">
-                        <div class="ui mini horizontal link list">
-                            <div class="item">
-                                <p>Posted by: Leon Lin</p>
-                            </div>
-                            <div class="item">
-                                <i class="calendar alternate outline icon"></i> Updated on: 07-14-2021
-                            </div>
-                            <div class="item">
-                                <i class="eye icon"></i> 123
-                            </div>
+                        <div class="ui medium label">
+                            <span>Posted by: </span>
+                            <th:block th:text="${blog.user.nickname}">User</th:block>
+                        </div>
+                        <div class="ui medium label">
+                            <span>Updated on: </span>
+                            <th:block th:text="${#dates.format(blog.updatedTime, 'MM-dd-yyyy')}">Updated Time</th:block>
                         </div>
                     </div>
                     <div class="m-alignment-responsive column">
-                        <a href="#" target="_blank" class="ui teal label m-text-thin m-margin-lr-mini">test tag1</a>
-                        <a href="#" target="_blank" class="ui teal label m-text-thin m-margin-lr-mini">test tag2</a>
-                        <a href="#" target="_blank" class="ui teal label m-text-thin m-margin-lr-mini" >test tag3</a>
+                        <div th:each="tag : ${blog.tags}"
+                             th:text="${tag.name}"
+                             class="ui medium teal label">Tag Name</div>
                     </div>
                 </div>
             </div>
 
             <!--Cover Image-->
             <div class="ui attached segment">
-                <img src="https://picsum.photos/id/102/800/450" alt="" class="ui fluid rounded image">
+                <img th:src="@{${blog.cover}}" alt="" class="ui fluid rounded image">
             </div>
 
             <!--Blog Content-->
             <div class="ui attached segment">
                 <br>
                 <div class="typo typo-selection">
-                    <h2 class="ui center aligned header" id="title">Lorem Ipsum</h2>
+                    <h2 th:text="${blog.title}" class="ui center aligned header" id="title">Title</h2>
                     <div id="blog-content" class="m-responsive-padded-lr-massive m-padded-tb-large js-toc-content">
                         <ol id="table">
                             <li><a href="#section1">关于 <i class="serif">Typo.css</i></a></li>

@@ -33,10 +33,7 @@ public class IndexController {
 
     @GetMapping("/blog-post/{id}")
     public String blogPost(@PathVariable Long id, Model model) {
-        Blog b = blogService.getBlog(id);
-        if (b == null) {
-            throw new NotFoundException("Blog Doesn't Exist!");
-        }
+        Blog b = blogService.getBlogAndConvertContent(id);
         model.addAttribute("blog", b);
         return "blog-post";
     }

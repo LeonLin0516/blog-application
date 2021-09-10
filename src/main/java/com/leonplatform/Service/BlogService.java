@@ -11,6 +11,8 @@ public interface BlogService {
 
     Blog getBlog(Long id);
 
+    Blog getBlogAndConvertContent(Long id);
+
     Blog saveBlog(Blog blog);
 
     Page<Blog> listBlog(Pageable pageable);

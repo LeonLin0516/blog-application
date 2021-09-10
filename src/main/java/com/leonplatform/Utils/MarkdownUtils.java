@@ -27,18 +27,18 @@ public class MarkdownUtils {
         Set<Extension> headingAnchorExtensions = Collections.singleton(HeadingAnchorExtension.create());
         List<Extension> tableExtension = Arrays.asList(TablesExtension.create());
         Parser parser = Parser.builder()
-                .extensions(tableExtension)
-                .build();
+                              .extensions(tableExtension)
+                              .build();
         Node document = parser.parse(markdown);
         HtmlRenderer renderer = HtmlRenderer.builder()
-                .extensions(headingAnchorExtensions)
-                .extensions(tableExtension)
-                .attributeProviderFactory(new AttributeProviderFactory() {
-                    public AttributeProvider create(AttributeProviderContext context) {
-                        return new CustomAttributeProvider();
-                    }
-                })
-                .build();
+            .extensions(headingAnchorExtensions)
+            .extensions(tableExtension)
+            .attributeProviderFactory(new AttributeProviderFactory() {
+                public AttributeProvider create(AttributeProviderContext context) {
+                    return new CustomAttributeProvider();
+                }
+            })
+            .build();
         return renderer.render(document);
     }
 
@@ -46,10 +46,10 @@ public class MarkdownUtils {
         @Override
         public void setAttributes(Node node, String tagName, Map<String, String> attributes) {
             if (node instanceof Link) {
-                    attributes.put("target", "_blank");
+                attributes.put("target", "_blank");
             }
             if (node instanceof TableBlock) {
-                    attributes.put("class", "ui celled table");
+                attributes.put("class", "ui celled table");
             }
         }
     }

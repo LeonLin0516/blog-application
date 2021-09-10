@@ -4,6 +4,7 @@ import com.leonplatform.DAO.BlogRepository;
 import com.leonplatform.NotFoundException;
 import com.leonplatform.Objects.Blog;
 import com.leonplatform.Objects.Tag;
+import com.leonplatform.Utils.MarkdownUtils;
 import com.leonplatform.ViewObjects.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,18 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Blog getBlog(Long id) {
         return blogRepository.findById(id).get();
+    }
+
+    @Override
+    public Blog getBlogAndConvertContent(Long id) {
+        Blog blog = blogRepository.findById(id).get();
+        if (blog == null) {
+            throw new NotFoundException("This Blog Doesn't Exist!");
+        }
+        Blog b = new Blog();
+        BeanUtils.copyProperties(blog, b);
+        b.setContent(MarkdownUtils.markdownToHtml(blog.getContent()));
+        return b;
     }
 
     @Override

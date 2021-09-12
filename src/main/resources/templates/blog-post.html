@@ -62,6 +62,8 @@
 
             <!--Comments-->
             <div class="ui bottom attached segment">
+
+                <!--Display-->
                 <div class="ui teal segment">
                     <div class="ui threaded comments">
                         <h3 class="ui dividing header" id="comment">Comments</h3>
@@ -137,9 +139,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui form">
+
+                <!--Post-->
+                <div class="ui form" method="post" id="commentContainer">
+                    <input type="hidden" name="blog.id" th:value="*{blog.id}">
+                    <input type="hidden" name="parentComment.id" value="-1">
                     <div class="field">
-                        <textarea name="post-comment" placeholder="Please enter comment..."></textarea>
+                        <textarea name="commentContent" placeholder="Please enter comment..."></textarea>
                     </div>
                     <div class="fields">
                         <div class="field m-mobile-wide m-mobile-tb-mini">
@@ -155,9 +161,10 @@
                             </div>
                         </div>
                         <div class="field m-mobile-wide m-mobile-tb-mini">
-                            <div class="ui teal button m-mobile-wide"><i class="edit icon"></i>Submit</div>
+                            <button class="ui teal button m-mobile-wide" id="commentSubmit"><i class="edit icon"></i>Submit</button>
                         </div>
                     </div>
+                    <div class="ui mini error message"></div>
                 </div>
             </div>
         </div>
@@ -170,6 +177,57 @@
 <th:block th:replace="_fragments :: sharedScripts"></th:block>
 <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
 <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+<script>
+    // comment form checking
+    $('.ui.form').form({
+        fields : {
+            commentContent : {
+                identifier : 'commentContent',
+                rules : [{
+                    type : 'empty',
+                    prompt : 'Comment can\'t be empty',
+                }]
+            },
+            nickname : {
+                identifier : 'nickname',
+                rules : [{
+                    type : 'empty',
+                    prompt : 'Nickname can\'t be empty',
+                }]
+            },
+            email : {
+                identifier : 'email',
+                rules : [{
+                    type : 'email',
+                    prompt : 'Invalid email',
+                }]
+            }
+        }
+    });
+    $('#commentSubmit').click(function () {
+        let bool = $('.ui.form').form('validate form');
+        if (bool) {
+            console.log("good");
+        } else {
+            console.log("failed");
+        }
+    });
+    function postComment() {
+        $('#commentContainer').load(/*[[@{/comments}]]*/"", {
+            "parenComment.id" : $("[name='parentComment.id']").val(),
+            "blog.id" : $("[name='blog.id']").val(),
+            "content" : $("[name='content']").val(),
+            "nickname" : $("[name='nickname']").val(),
+            "email" : $("[name='email']").val(),
+        }, function (responseTxt, statusTxt, xhr) {
+            $(window).scrollTo($('#comment'), 500);
+            $("[name='parentComment.id']").val();
+            $("[name='content']").val('');
+            $("[name='nickname']").val('');
+            $("[name='email']").val('');
+        });
+    }
+</script>
 
 </body>
 </html>

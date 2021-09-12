@@ -38,7 +38,6 @@
                     <!--display all blogs-->
                     <div class="ui attached segment">
                         <div th:each="blog : ${page.content}"
-                             th:if="${blog.published == true}"
                              class="ui vertical segment m-padded-tb-large">
                             <div class="ui middle aligned mobile reversed stackable grid">
                                 <div class="eleven wide column">

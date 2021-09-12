@@ -79,6 +79,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Page<Blog> listPublishedBlog(Pageable pageable) {
+        return blogRepository.findBlogsByPublishedIsTrue(pageable);
+    }
+
+    @Override
     public List<Blog> listBlog() {
         return blogRepository.findAll();
     }

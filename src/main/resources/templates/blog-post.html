@@ -73,15 +73,34 @@
                                     <img src="https://picsum.photos/id/102/450/450">
                                 </a>
                                 <div class="content">
-                                    <span class="author" th:text="${comment.nickname}">Matt</span>
+                                    <span class="author" th:text="${comment.nickname}">Nickname</span>
                                     <div class="metadata">
-                                        <span class="date" th:text="${#dates.format(comment.createTime, 'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                        <span class="date" th:text="${#dates.format(comment.createTime, 'yyyy-MM-dd HH:mm')}">Date of comment</span>
                                     </div>
                                     <div class="text" th:text="${comment.content}">
-                                        How artistic!
+                                        Comment Content
                                     </div>
                                     <div class="actions">
-                                        <a class="reply"  onclick="reply(this)" th:attr="data-commentid=${comment.id}, data-commentnickname=${comment.nickname}">Reply</a>
+                                        <a class="reply" th:attr="data-commentid=${comment.id}, data-commentnickname=${comment.nickname}" onclick="reply(this)">Reply</a>
+                                    </div>
+                                </div>
+                                <div class="comments">
+                                    <div class="comment">
+                                        <a class="avatar">
+                                            <img src="https://picsum.photos/id/102/450/450">
+                                        </a>
+                                        <div class="content">
+                                            <span class="author" th:text="${comment.nickname}">Nickname</span>
+                                            <div class="metadata">
+                                                <span class="date" th:text="${#dates.format(comment.createTime, 'yyyy-MM-dd HH:mm')}">Date of comment</span>
+                                            </div>
+                                            <div class="text" th:text="${comment.content}">
+                                                Comment Content
+                                            </div>
+                                            <div class="actions">
+                                                <a class="reply" th:attr="data-commentid=${comment.id}, data-commentnickname=${comment.nickname}" onclick="reply(this)">Reply</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +113,7 @@
                     <input type="hidden" name="blog.id" th:value="${blog.id}">
                     <input type="hidden" name="parentComment.id" value="-1">
                     <div class="field">
-                        <textarea name="content" placeholder="Please enter comment..."></textarea>
+                        <textarea name="content" id="comment-content" placeholder="Please enter comment..."></textarea>
                     </div>
                     <div class="fields">
                         <div class="field m-mobile-wide m-mobile-tb-mini">
@@ -157,10 +176,9 @@
     $('#comment-submit-btn').click(function () {
         let bool = $('.ui.form').form('validate form');
         if (bool) {
-            console.log("good");
             postData();
         } else {
-            console.log("failed");
+            console.log("unable to submit comment!");
         }
     });
     function postData() {
@@ -171,7 +189,6 @@
             "email"   : $("[name='email']").val(),
             "content" : $("[name='content']").val(),
         },function (responseTxt, statusTxt, xhr) {
-            console.log("load completed")
             clearContent();
         });
     }
@@ -183,9 +200,10 @@
         $("[name='content']").attr("placeholder", "Please enter comment...");
     }
     function reply(obj) {
-        const commentId = $(obj).data('commentid');
+        const parentId = $(obj).data('commentid');
         const nickname = $(obj).data('commentnickname');
-        $("[name='commentContent']").attr('placeholder', '@'+nickname).focus();
+        $("[name='content']").attr('placeholder', '@'+nickname).focus();
+        $("[name='parentComment.id']").val(parentId);
     }
 </script>
 

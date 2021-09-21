@@ -27,15 +27,8 @@ public class IndexController {
                         Model model) {
         model.addAttribute("page", blogService.listPublishedBlog(pageable));
         model.addAttribute("tags", tagService.listTopTags(7));
-        model.addAttribute("archives", new BlogArchives(blogService.listBlog()));
+        model.addAttribute("archives", new BlogArchives(blogService.listPublishedBlog()));
         return "index";
-    }
-
-    @GetMapping("/blog-post/{id}")
-    public String blogPost(@PathVariable Long id, Model model) {
-        Blog b = blogService.getBlogAndConvertContent(id);
-        model.addAttribute("blog", b);
-        return "blog-post";
     }
 
     @GetMapping("/about-me")

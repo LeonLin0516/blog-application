@@ -11,4 +11,6 @@ import java.util.List;
 public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificationExecutor<Blog> {
 
     Page<Blog> findBlogsByPublishedIsTrue(Pageable pageable);
+
+    List<Blog> findBlogsByPublishedIsTrue();
 }

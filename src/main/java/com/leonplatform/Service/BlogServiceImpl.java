@@ -24,7 +24,7 @@ import static com.leonplatform.Utils.ConversionUtils.convertToList;
 public class BlogServiceImpl implements BlogService {
 
     @Autowired
-    BlogRepository blogRepository;
+    private BlogRepository blogRepository;
 
     @Override
     public Blog getBlog(Long id) {
@@ -81,6 +81,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Page<Blog> listPublishedBlog(Pageable pageable) {
         return blogRepository.findBlogsByPublishedIsTrue(pageable);
+    }
+
+    @Override
+    public List<Blog> listPublishedBlog() {
+        return blogRepository.findBlogsByPublishedIsTrue();
     }
 
     @Override

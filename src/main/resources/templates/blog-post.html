@@ -68,6 +68,7 @@
                     <div th:fragment="commentList">
                         <div class="ui threaded comments">
                             <h3 class="ui dividing header">Comments</h3>
+
                             <div th:each="comment : ${comments}" class="comment">
                                 <a class="avatar">
                                     <img src="https://picsum.photos/id/102/450/450">
@@ -84,26 +85,18 @@
                                         <a class="reply" th:attr="data-commentid=${comment.id}, data-commentnickname=${comment.nickname}" onclick="reply(this)">Reply</a>
                                     </div>
                                 </div>
-                                <div class="comments">
-                                    <div class="comment">
-                                        <a class="avatar">
-                                            <img src="https://picsum.photos/id/102/450/450">
-                                        </a>
-                                        <div class="content">
-                                            <span class="author" th:text="${comment.nickname}">Nickname</span>
-                                            <div class="metadata">
-                                                <span class="date" th:text="${#dates.format(comment.createTime, 'yyyy-MM-dd HH:mm')}">Date of comment</span>
-                                            </div>
-                                            <div class="text" th:text="${comment.content}">
-                                                Comment Content
-                                            </div>
-                                            <div class="actions">
-                                                <a class="reply" th:attr="data-commentid=${comment.id}, data-commentnickname=${comment.nickname}" onclick="reply(this)">Reply</a>
-                                            </div>
-                                        </div>
+
+                                <th:block th:if="${#arrays.length(comment.replyComments) > 0}">
+                                    <div class="comments">
+                                        <th:block th:replace="_fragments :: commentRecursion(${comment.replyComments})"></th:block>
                                     </div>
-                                </div>
+                                </th:block>
+
+<!--                                <div class="comments" th:if="${#arrays.length(comment.replyComments) > 0}">-->
+<!--                                    <div th:replace="_fragments :: commentRecusion(~{comment.replyComments})"></div>-->
+<!--                                </div>-->
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -141,7 +134,6 @@
 
     <!--Bottom Footer-->
     <footer th:replace="_fragments :: footer"></footer>
-
 
 <th:block th:replace="_fragments :: sharedScripts"></th:block>
 <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>

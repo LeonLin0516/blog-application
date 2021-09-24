@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 @RequestMapping("/blog-post")
@@ -25,7 +26,9 @@ public class CommentController {
 
     @GetMapping("/comments/{blogId}")
     public String comments(@PathVariable Long blogId, Model model) {
-        model.addAttribute("comments", commentService.listCommentByBlogId(blogId));
+        List<Comment> comments = commentService.listParentCommentByBlogId(blogId);
+        System.out.println(comments);
+        model.addAttribute("comments", comments);
         return "blog-post :: commentList";
     }
 

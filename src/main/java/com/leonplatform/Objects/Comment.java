@@ -95,6 +95,10 @@ public class Comment {
         this.replyComments = replyComments;
     }
 
+    public void addReplyComment(Comment comment) {
+        this.replyComments.add(comment);
+    }
+
     public Comment getParentComment() {
         return parentComment;
     }

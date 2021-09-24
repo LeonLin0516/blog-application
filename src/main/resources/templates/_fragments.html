@@ -70,6 +70,31 @@
     </div>
   </footer>
 
+
+  <div th:fragment="commentRecursion(c)" th:each="comment : ${c}" class="comment">
+    <a class="avatar">
+      <img src="https://picsum.photos/id/102/450/450">
+    </a>
+    <div class="content">
+      <span class="author" th:text="${comment.nickname}">Nickname</span>
+      <div class="metadata">
+        <span class="date" th:text="${#dates.format(comment.createTime, 'yyyy-MM-dd HH:mm')}">Date of comment</span>
+      </div>
+      <div class="text" th:text="${comment.content}">
+        Comment Content
+      </div>
+      <div class="actions">
+        <a class="reply" th:attr="data-commentid=${comment.id}, data-commentnickname=${comment.nickname}" onclick="reply(this)">Reply</a>
+      </div>
+    </div>
+
+    <th:block th:if="${#arrays.length(comment.replyComments) > 0}">
+      <div class="comments">
+        <th:block th:replace="_fragments :: commentRecursion(${comment.replyComments})"></th:block>
+      </div>
+    </th:block>
+  </div>
+
 <!--Shared JS-->
 <th:block th:fragment="sharedScripts">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>

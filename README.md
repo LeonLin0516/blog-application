@@ -1,1 +1,1 @@
-# leon-platform
+# blog-application
